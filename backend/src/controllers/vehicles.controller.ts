@@ -146,3 +146,64 @@ export const deleteVehicle = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export const purchaseVehicle = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const vehicle = await prisma.vehicle.findUnique({
+      where: { id },
+    });
+
+    if (!vehicle) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
+    if (vehicle.quantity <= 0) {
+      return res.status(400).json({ error: 'Vehicle is out of stock' });
+    }
+
+    const updatedVehicle = await prisma.vehicle.update({
+      where: { id },
+      data: {
+        quantity: vehicle.quantity - 1,
+      },
+    });
+
+    return res.status(200).json(updatedVehicle);
+  } catch (error) {
+    console.error('Error purchasing vehicle:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const restockVehicle = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { quantity } = req.body;
+
+    if (quantity === undefined || typeof quantity !== 'number' || quantity < 1) {
+      return res.status(400).json({ error: 'Restock quantity must be a positive integer' });
+    }
+
+    const vehicle = await prisma.vehicle.findUnique({
+      where: { id },
+    });
+
+    if (!vehicle) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
+    const updatedVehicle = await prisma.vehicle.update({
+      where: { id },
+      data: {
+        quantity: vehicle.quantity + quantity,
+      },
+    });
+
+    return res.status(200).json(updatedVehicle);
+  } catch (error) {
+    console.error('Error restocking vehicle:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
