@@ -71,10 +71,28 @@ describe('Vehicles Endpoints', () => {
   });
 
   describe('POST /api/vehicles', () => {
-    it('should allow users to add a new vehicle', async () => {
+    it('should block non-admin users from adding a vehicle', async () => {
       const response = await request(app)
         .post('/api/vehicles')
         .set('Authorization', `Bearer ${userToken}`)
+        .send({
+          make: 'Honda',
+          model: 'Civic',
+          category: 'Sedan',
+          price: 22000.0,
+          quantity: 3,
+        });
+
+      expect(response.status).toBe(403);
+
+      const count = await prisma.vehicle.count();
+      expect(count).toBe(1);
+    });
+
+    it('should allow admins to add a new vehicle', async () => {
+      const response = await request(app)
+        .post('/api/vehicles')
+        .set('Authorization', `Bearer ${adminToken}`)
         .send({
           make: 'Honda',
           model: 'Civic',
@@ -94,7 +112,7 @@ describe('Vehicles Endpoints', () => {
     it('should return 400 if validation fails', async () => {
       const response = await request(app)
         .post('/api/vehicles')
-        .set('Authorization', `Bearer ${userToken}`)
+        .set('Authorization', `Bearer ${adminToken}`)
         .send({
           make: 'Honda',
           // missing model, category, etc.
@@ -156,10 +174,27 @@ describe('Vehicles Endpoints', () => {
   });
 
   describe('PUT /api/vehicles/:id', () => {
-    it('should allow users to update vehicle details', async () => {
+    it('should block non-admin users from updating vehicle details', async () => {
       const response = await request(app)
         .put(`/api/vehicles/${existingVehicleId}`)
         .set('Authorization', `Bearer ${userToken}`)
+        .send({
+          price: 25000.0,
+          quantity: 6,
+        });
+
+      expect(response.status).toBe(403);
+
+      const dbVehicle = await prisma.vehicle.findUnique({
+        where: { id: existingVehicleId },
+      });
+      expect(dbVehicle!.price).toBe(24000.0);
+    });
+
+    it('should allow admins to update vehicle details', async () => {
+      const response = await request(app)
+        .put(`/api/vehicles/${existingVehicleId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
         .send({
           price: 25000.0,
           quantity: 6,
@@ -178,7 +213,7 @@ describe('Vehicles Endpoints', () => {
     it('should return 404 for updating a non-existent vehicle', async () => {
       const response = await request(app)
         .put('/api/vehicles/non-existent-uuid')
-        .set('Authorization', `Bearer ${userToken}`)
+        .set('Authorization', `Bearer ${adminToken}`)
         .send({ price: 30000.0 });
 
       expect(response.status).toBe(404);

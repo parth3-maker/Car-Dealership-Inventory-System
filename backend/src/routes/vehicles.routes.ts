@@ -16,9 +16,9 @@ const router = Router();
 router.use(authenticateToken as any);
 
 router.get('/', getAllVehicles);
-router.post('/', createVehicle);
 router.get('/search', searchVehicles);
-router.put('/:id', updateVehicle);
+router.post('/', requireAdmin as any, createVehicle);
+router.put('/:id', requireAdmin as any, updateVehicle);
 router.delete('/:id', requireAdmin as any, deleteVehicle);
 router.post('/:id/purchase', purchaseVehicle);
 router.post('/:id/restock', requireAdmin as any, restockVehicle);
