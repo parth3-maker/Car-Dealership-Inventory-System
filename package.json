@@ -1,0 +1,21 @@
+{
+  "name": "car-dealership-inventory-system",
+  "version": "1.0.0",
+  "description": "Full-stack Car Dealership Inventory System built with React/Vite/TS & Node/Express/SQLite/Prisma",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "npx -y concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "test:backend": "npm run test --prefix backend"
+  },
+  "keywords": [
+    "tdd",
+    "react",
+    "express",
+    "prisma",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "ISC"
+}
