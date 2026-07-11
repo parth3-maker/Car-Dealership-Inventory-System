@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Velocity Motors — Car Dealership Inventory System
 
 A full-stack car dealership inventory application built with **Test-Driven Development (TDD)**. Customers can browse and purchase vehicles; dealership staff (admins) manage inventory.
@@ -122,3 +123,7 @@ npm run test:backend
 ```
 
 Tests use an isolated SQLite database (`backend/test.db`) and cover authentication, vehicle CRUD, search, purchase, and restock flows.
+=======
+# Car-Dealership-Inventory-System
+Developed a full-stack Car Dealership Inventory System using the MERN Stack for managing vehicle inventory, user authentication, and vehicle purchases.
+>>>>>>> bca421025f91f02b61b0d38dd3cfa93df5d311ec
