@@ -129,4 +129,18 @@ Developed a full-stack Car Dealership Inventory System using the MERN Stack for 
 >>>>>>> bca421025f91f02b61b0d38dd3cfa93df5d311ec
 
 Screenshots For The Project
+
+
 ![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20195950.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200218.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200234.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200240.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200249.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200254.png?raw=true)
+
+![This_Is_image](https://github.com/parth3-maker/Car-Dealership-Inventory-System/blob/main/Screenshot%202026-07-12%20200302.png?raw=true)
